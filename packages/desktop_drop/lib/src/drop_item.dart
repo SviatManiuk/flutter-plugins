@@ -28,6 +28,7 @@ abstract class DropItem extends XFile {
   ///
   /// In this case, the original source path is not available by design.
   final bool fromPromise;
+
   DropItem(
     super.path, {
     super.mimeType,
@@ -49,6 +50,14 @@ abstract class DropItem extends XFile {
     this.extraAppleBookmark,
     this.fromPromise = false,
   }) : super.fromData();
+
+  // Web only
+  DropItem.fromHtmlFile(
+    dynamic file, {
+    String? path,
+    this.extraAppleBookmark,
+    this.fromPromise = false,
+  }) : super.fromHtmlFile(file, path: path);
 }
 
 class DropItemFile extends DropItem {
@@ -72,6 +81,12 @@ class DropItemFile extends DropItem {
     super.path,
     super.fromPromise,
   }) : super.fromData();
+
+  DropItemFile.fromHtmlFile(
+    dynamic file, {
+    String? path,
+    super.fromPromise,
+  }) : super.fromHtmlFile(file, path: path);
 }
 
 /// A dropped directory.

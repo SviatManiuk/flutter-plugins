@@ -71,6 +71,7 @@ class DesktopDropWeb {
 
     return WebDropItem(
       uri: web.URL.createObjectURL(file),
+      file: file,
       name: file.name,
       size: file.size,
       lastModified: DateTime.fromMillisecondsSinceEpoch(file.lastModified),

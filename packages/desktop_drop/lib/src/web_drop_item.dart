@@ -1,11 +1,13 @@
 import 'dart:typed_data';
 
 import 'package:desktop_drop/src/drop_item.dart';
+import 'package:web/web.dart' as web;
 
 class WebDropItem {
   WebDropItem({
     required this.uri,
     required this.children,
+    this.file,
     this.data,
     required this.name,
     required this.type,
@@ -15,6 +17,7 @@ class WebDropItem {
   });
 
   final String uri;
+  final web.File? file;
   final List<WebDropItem> children;
   final Uint8List? data;
   final String name;
@@ -62,6 +65,10 @@ class WebDropItem {
         bytes: data,
       );
     } else {
+      if (file != null) {
+        return DropItemFile.fromHtmlFile(file!, path: uri);
+      }
+
       if (data != null) {
         return DropItemFile.fromData(
           data!,
